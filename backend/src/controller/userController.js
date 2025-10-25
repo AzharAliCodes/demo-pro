@@ -75,9 +75,7 @@ const getUser = async (req, res) => {
 
     if (!email){
       return res.status(400).json({error: "Email is required"})
-    }
-    const isMatch = await bcrypt.compare(password, user.password)
-    
+    }    
     const user = await getUserByEmail(email);
     if (!user){
       return res.status(400).json({error:"Invlaid email"})
@@ -123,5 +121,6 @@ const updateUserById = async (req, res) =>{
 module.exports = {
   registerUser,
   loginUser,
-  updateUserById
+  updateUserById,
+  getUser,
 }
