@@ -7,3 +7,26 @@ CREATE TABLE users (
     profession VARCHAR(20) CHECK (profession IN ('volunteer', 'manager', 'organizer', 'admin')),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+
+CREATE TABLE tickets (
+  id SERIAL PRIMARY KEY,
+  name TEXT NOT NULL,
+  ticket_url TEXT,
+  number INTEGER NOT NULL,
+  cash NUMERIC(10,2) DEFAULT 20.00,
+  user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  is_valid BOOLEAN DEFAULT TRUE,
+  created_at TIMESTAMP DEFAULT now()
+);
+
+
+CREATE TABLE scans (
+  id SERIAL PRIMARY KEY,
+  ticket_id INTEGER NOT NULL REFERENCES tickets(id) ON DELETE CASCADE,
+  user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  scan_type TEXT NOT NULL CHECK (scan_type IN ('entry', 'exit')), 
+  scanned_at TIMESTAMP DEFAULT now()
+);
+
+
