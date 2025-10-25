@@ -1,4 +1,4 @@
- const {createTicket, AddUrl,viewTicket, viewAllTicket} = require('../model/ticketModel')
+ const {createTicket, AddUrl,viewTicket, viewAllTicket,viewTicketUrl} = require('../model/ticketModel')
 
  const addTicket = async (req, res) => {
    try{
@@ -66,10 +66,21 @@
   }
  }
 
+  const viewTicketsUrl = async (req, res) => {
+  try{
+   const { id } = req.body
+   const user = await viewAllTicket(id)
+   res.status(200).json({user})
+  } catch (err){
+    console.error(err)
+    res.status(500).json({error : "Internal server error"})
+  }
+ }
 
  module.exports = {
   addTicket,
   updateUrl,
   viewTickets,
-  viewAllTickets
+  viewAllTickets,
+  viewTicketsUrl
  }
