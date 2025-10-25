@@ -37,7 +37,7 @@ const viewTicket = async (user_id) => {
 
 const viewTicketUrl = async (id) => {
   try{
-   const result = await pool.query("SELECT ticket_url FROM tickets WHERE = $id",[id])  
+   const result = await pool.query("SELECT ticket_url FROM tickets WHERE id = $1",[id])  
    return result.rows
   }catch (err) {
     console.error(err);

@@ -69,7 +69,7 @@
   const viewTicketsUrl = async (req, res) => {
   try{
    const { id } = req.body
-   const user = await viewAllTicket(id)
+   const user = await viewTicketUrl(id)
    res.status(200).json({user})
   } catch (err){
     console.error(err)
