@@ -32,10 +32,10 @@ const updateUser = async ({ id, name, phone_number, email, profession }) => {
     `UPDATE users
      SET 
        name = COALESCE($1, name),
-       phone_number = COALESCE($3, phone_number),
-       email = COALESCE($4, email),
-       profession = COALESCE($5, profession)
-     WHERE id = $6
+       phone_number = COALESCE($2, phone_number),
+       email = COALESCE($3, email),
+       profession = COALESCE($4, profession)
+     WHERE id = $5
      RETURNING *`,
     [name, phone_number, email, profession, id]
   );

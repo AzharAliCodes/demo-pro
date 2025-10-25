@@ -91,7 +91,7 @@ const getUser = async (req, res) => {
 }
 
 const updateUserById = async (req, res) =>{
-  try{
+  try{ 
     const {id, name,  phone_number, email, profession} = req.body;
     if (!name || !phone_number || !email || !profession){
       return res.status(400).json({error: "All fields are required"})
@@ -111,6 +111,10 @@ const updateUserById = async (req, res) =>{
       return res.status(400).json({ error: "Invalid email format" });
     }
     const user = await updateUser({id, name,  phone_number, email, profession})
+    res.status(201).json({
+           message: "User Updated successfully",
+           user,
+       }) 
   }catch (err) {
     console.error(err);
     res.status(500).json({ error: "Internal server error" });
