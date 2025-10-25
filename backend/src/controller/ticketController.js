@@ -1,5 +1,28 @@
- const {} = require('../model/ticketModel')
+ const {createTicket} = require('../model/ticketModel')
+
+ const addTicket = async (req, res) => {
+   try{
+    const {name, number, id} = req.body
+   if (!name , !number){
+    return res.status(400).json({error:"ALL Fileds are required"})
+   }
+
+   const phoneRegex = /^[0-9]{10,15}$/;
+   if(!phoneRegex.test(number)){
+      return res.status(400).json({error:"phone number must be  10-15 digits"})
+   }
+  
+   const user = createTicket(name, number, id)
+   res.status(200).json({
+    message:"Ticket created successfully",
+    user
+   })
+  } catch (err){
+    console.error(err)
+    res.status(500).json({error : "Internal server error"})
+  }
+ }
 
  module.exports = {
-  
+  addTicket,
  }
