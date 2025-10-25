@@ -25,7 +25,19 @@ const AddUrl = async (ticket_url, id) => {
     console.error(err);
   }
 }
+
+const viewTicket = async (user_id) => {
+  try{
+   const result = await pool.query("SELECT * FROM tickets WHERE user_id = $1",[user_id])
+   console.log(result.rows);
+   
+   return result.rows
+  }catch (err) {
+    console.error(err);
+  }
+}
 module.exports = {
   createTicket,
-  AddUrl
+  AddUrl,
+  viewTicket
 }
