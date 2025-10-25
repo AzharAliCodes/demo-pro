@@ -1,4 +1,4 @@
- const {createTicket} = require('../model/ticketModel')
+ const {createTicket, AddUrl} = require('../model/ticketModel')
 
  const addTicket = async (req, res) => {
    try{
@@ -12,9 +12,7 @@
       return res.status(400).json({error:"phone number must be  10-15 digits"})
    }
   
-   const user = await createTicket(name, number, id)
-   console.log(user);
-   
+   const user = await createTicket(name, number, id)  
    res.status(200).json({
     message:"Ticket created successfully",
     user,
@@ -25,6 +23,22 @@
   }
  }
 
+ const updateUrl = async (req, res) => {
+   try{
+   const {ticket_url, id} = req.body
+   const user = await AddUrl(ticket_url, id)
+   res.status(200).json({
+    message:"Ticket url added successfully",
+    user
+   })
+  } catch (err){
+    console.error(err)
+    res.status(500).json({error : "Internal server error"})
+  }
+ }
+
+
  module.exports = {
   addTicket,
+  updateUrl
  }
