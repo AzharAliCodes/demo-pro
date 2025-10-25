@@ -118,6 +118,25 @@ const updateUserById = async (req, res) =>{
     res.status(500).json({ error: "Internal server error" });
   }
 }
+
+const deleteUser = async (req, res) => {
+  try {
+    const {email} = req.body;
+
+    if (!email){
+      return res.status(400).json({error: "Email is required"})
+    }    
+    const user = await getUserByEmail(email);
+    if (!user){
+      return res.status(400).json({error:"Invlaid email"})
+    } 
+    const dUser = deleteUserByEmail(email)
+    res.status(200).json(dUser) 
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Internal server error" });
+  }
+}
 module.exports = {
   registerUser,
   loginUser,
