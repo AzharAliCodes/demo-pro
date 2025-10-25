@@ -12,10 +12,12 @@
       return res.status(400).json({error:"phone number must be  10-15 digits"})
    }
   
-   const user = createTicket(name, number, id)
+   const user = await createTicket(name, number, id)
+   console.log(user);
+   
    res.status(200).json({
     message:"Ticket created successfully",
-    user
+    user,
    })
   } catch (err){
     console.error(err)
