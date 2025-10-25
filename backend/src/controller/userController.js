@@ -1,4 +1,4 @@
-const { createUser, getUserByEmail } = require("../model/userModel")
+const { createUser, getUserByEmail, deleteUserByEmail,updateUser } = require("../model/userModel")
 const bcrypt = require('bcrypt')
 
 const registerUser = async (req, res) => {
@@ -69,28 +69,55 @@ const registerUser = async (req, res) => {
   }
  }
 
-const updateUser = async (req, res) => {
+const getUser = async (req, res) => {
   try {
     const {email} = req.body;
 
     if (!email){
       return res.status(400).json({error: "Email is required"})
     }
+    const isMatch = await bcrypt.compare(password, user.password)
+    
     const user = await getUserByEmail(email);
     if (!user){
       return res.status(400).json({error:"Invlaid email"})
+    } else {
+      return res.status(200).json(user)
+    }
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Internal server error" });
+  }
+}
+
+const updateUserById = async (req, res) =>{
+  try{
+    const {id, name,  phone_number, email, profession} = req.body;
+    if (!name || !phone_number || !email || !profession){
+      return res.status(400).json({error: "All fields are required"})
     }
 
-  res.status(200).json({
-    message:"updared successfully",
-    user,
-  })
-  } catch (err) {
+    if(typeof name !== "string" || name.trim().length <= 3){
+      return res.status(400).json({error:"Name must be at least 2 characters long"})
+    }
+
+    const phoneRegex = /^[0-9]{10,15}$/;
+    if(!phoneRegex.test(phone_number)){
+      return res.status(400).json({error:"phone number must be  10-15 digits"})
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      return res.status(400).json({ error: "Invalid email format" });
+    }
+    const user = await updateUser({id, name,  phone_number, email, profession})
+  }catch (err) {
     console.error(err);
     res.status(500).json({ error: "Internal server error" });
   }
 }
 module.exports = {
   registerUser,
-  loginUser
+  loginUser,
+  updateUser
 }
