@@ -27,9 +27,9 @@ const logScan = async (ticket_id, user_id, scan_type) => {
   );
 };
 
-const excitScan = async (ticket_id, scan_type) => {
+const exitScan = async (ticket_id, scan_type) => {
   await pool.query(
-    `UPDATE scans
+  `UPDATE scans
   SET scan_type = $2
   WHERE id = $1;
   `,
@@ -41,5 +41,5 @@ const excitScan = async (ticket_id, scan_type) => {
 module.exports = {
 entry,
 logScan,
-excitScan
+exitScan
 }

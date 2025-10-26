@@ -1,4 +1,4 @@
-const {entry,logScan} = require('../model/scanModel')
+const {entry,logScan, exitScan} = require('../model/scanModel')
 
 const scanEntery = async(req, res) =>{
   try{
@@ -17,11 +17,11 @@ const scanEntery = async(req, res) =>{
 } 
 
 const scanExit = async(req, res) =>{
-  try{
+  try{    
     const {ticket_id, scan_type} = req.body
-    await logScan(ticket_id, scan_type);
-
-    res.status(200).json({ message: "Scan successful", ticket: checked });
+    console.log(ticket_id, scan_type)
+    await exitScan(ticket_id, scan_type)
+    res.status(200).json({ message: "exit successful"});
   }  catch (err){
     console.error(err)
     res.status(500).json({error : "Internal server error"})
