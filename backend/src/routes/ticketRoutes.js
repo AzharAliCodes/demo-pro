@@ -9,3 +9,4 @@ router.get('/atickets', viewAllTickets)
 router.get('/utickets', viewTicketsUrl)
 
 module.exports = router
+
