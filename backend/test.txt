@@ -31,19 +31,22 @@ CREATE TABLE scans (
 );
 
 
-
 CREATE TABLE stalls (
-    id NUMBER GENERATED IDENTITY PRIMARY KEY,
-    stall_no VARCHAR2(50) UNIQUE NOT NULL
+    id SERIAL PRIMARY KEY,
+    stall_no VARCHAR(50) UNIQUE NOT NULL
 );
 
 CREATE TABLE workers (
-    id NUMBER GENERATED PRIMARY KEY,
-    stall_no VARCHAR2(50) NOT NULL,
-    worker_name VARCHAR2(100) NOT NULL,
-    worker_number VARCHAR2(50) NOT NULL,
-    id_card_url CLOB,  
-    CONSTRAINT fk_stall FOREIGN KEY (stall_no) REFERENCES stalls(stall_no) ON DELETE CASCADE
+    id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    stall_no VARCHAR(50) NOT NULL,
+    worker_name VARCHAR(100) NOT NULL,
+    worker_number VARCHAR(50) NOT NULL,
+    id_card_url TEXT,
+    role VARCHAR(10) NOT NULL CHECK (role IN ('owner', 'worker')),
+    CONSTRAINT fk_stall FOREIGN KEY (stall_no)
+        REFERENCES stalls(stall_no)
+        ON DELETE CASCADE
 );
+
 
 
