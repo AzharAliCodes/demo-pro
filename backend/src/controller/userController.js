@@ -1,4 +1,5 @@
 const { createUser, getUserByEmail, deleteUserByEmail,updateUser } = require("../model/userModel")
+const generateToken = require('../utils/generateToken')
 const bcrypt = require('bcrypt')
 
 const registerUser = async (req, res) => {
@@ -49,7 +50,7 @@ const registerUser = async (req, res) => {
   try {
     const {email, password} = req.body;
 
-    if (!email, !password){
+    if (!email || !password){
       return res.status(400).json({error: "Email and password is required"})
     }
     const user = await getUserByEmail(email);
@@ -61,8 +62,11 @@ const registerUser = async (req, res) => {
     if(!isMatch){
       return res.status(400).json({error:"Invlaid email or password"})
     }
+    
+  const gtokenuser = {user_id: user.id, role: user.profession , email:email}
 
-  res.status(200).json({message:"Login successfully"})
+  const token = generateToken(gtokenuser)
+  res.status(200).json({message:"Login successfully",token})
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: "Internal server error" });
