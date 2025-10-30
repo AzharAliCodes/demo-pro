@@ -1,4 +1,4 @@
-const {addStall,stallCheck,addWorker,searchByNumber} = require('../model/stallsModel')
+const {addStall,stallCheck,addWorker,searchByNumber,UpdateByNumber} = require('../model/stallsModel')
 
 const addingWorker = async (req, res) => {
   try {
@@ -34,10 +34,27 @@ const searchingUser = async (req,res) => {
   }
 }
 
+const upadteUser = async (req,res) => {
+  try{
+    const {old_number, stall_no, worker_name, worker_number,role} = req.body
+    const result = await searchByNumber(old_number)
+    if (!result){
+      return res.status(404).json({ error: "User not found" })
+    }
+
+    const result2 = await UpdateByNumber(stall_no, worker_name, worker_number,role, old_number)
+    res.status(200).json({result2})
+  } catch (error) {
+    console.error(error)
+    res.status(500).json({ error: "Intenal Server error" });
+  }
+}
+
 
 module.exports = {
   addingWorker,
-  searchingUser
+  searchingUser,
+  upadteUser
 }
 
 

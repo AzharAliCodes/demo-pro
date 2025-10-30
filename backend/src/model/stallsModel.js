@@ -26,12 +26,19 @@ const result = await pool.query("SELECT * FROM workers WHERE worker_number = $1"
       return result.rows[0]
 }
 
+const UpdateByNumber = async (stall_no, worker_name, worker_number,role,old_number) =>{
+const result = await pool.query("UPDATE workers SET  stall_no = $1, worker_name = $2, worker_number = $3, role = $4 WHERE worker_number = $5; ",
+      [stall_no, worker_name, worker_number,role,old_number])
+      return result.rows[0]
+}
+
 
 module.exports = {
   addStall,
   addWorker,
   stallCheck,
-  searchByNumber
+  searchByNumber,
+  UpdateByNumber
 }
 
 
