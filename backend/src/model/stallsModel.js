@@ -24,9 +24,7 @@ const result = await pool.query(
 module.exports = {
   addStall,
   addWorker,
-  stallCheck,
-  ChekIdCard,
-  addIdCard
+  stallCheck
 }
 
 

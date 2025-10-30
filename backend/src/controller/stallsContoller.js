@@ -9,7 +9,7 @@ const addingWorker = async (req, res) => {
     }
     const stallChecking = await stallCheck(stall_no)
 
-    if (stallChecking.rows.length === 0) {
+    if (!stallChecking) {
       const result = await addStall(stall_no)
     }
     const addMember = await addWorker(stall_no, worker_name, worker_number, role)
@@ -21,9 +21,9 @@ const addingWorker = async (req, res) => {
 }
 
 
-
 module.exports = {
   addingWorker
 }
 
 
+ 

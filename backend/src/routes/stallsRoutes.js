@@ -4,4 +4,4 @@ const {addingWorker} = require('../controller/stallsContoller')
 
 routes.post('/stalls',addingWorker)
 
-module.exports = routes
+module.exports = routes 

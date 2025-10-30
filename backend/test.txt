@@ -31,32 +31,19 @@ CREATE TABLE scans (
 
 
 CREATE TABLE stalls (
-<<<<<<< HEAD
     id SERIAL PRIMARY KEY,
-=======
-   id SERIAL PRIMARY KEY,
->>>>>>> 12f94ce913b33134428ee2f66bcfa018231e7c8e
     stall_no VARCHAR(50) UNIQUE NOT NULL
 );
 
 CREATE TABLE workers (
-<<<<<<< HEAD
-    id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    stall_no VARCHAR(50) NOT NULL,
-    worker_name VARCHAR(100) NOT NULL,
-    worker_number VARCHAR(50) NOT NULL,
-    id_card_url TEXT,
-    role VARCHAR(10) NOT NULL CHECK (role IN ('owner', 'worker')),
-    CONSTRAINT fk_stall FOREIGN KEY (stall_no)
-        REFERENCES stalls(stall_no)
-        ON DELETE CASCADE
-=======
    id SERIAL PRIMARY KEY,
     stall_no VARCHAR(50) NOT NULL,
     worker_name VARCHAR(100) NOT NULL,
     worker_number VARCHAR(50) NOT NULL,
-    CONSTRAINT fk_stall FOREIGN KEY (stall_no) REFERENCES stalls(stall_no) ON DELETE CASCADE
->>>>>>> 12f94ce913b33134428ee2f66bcfa018231e7c8e
+    role VARCHAR(10) NOT NULL CHECK (role IN ('owner', 'worker')),
+    CONSTRAINT fk_stall FOREIGN KEY (stall_no)
+        REFERENCES stalls(stall_no)
+        ON DELETE CASCADE
 );
 
 
