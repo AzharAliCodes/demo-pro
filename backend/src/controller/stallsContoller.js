@@ -1,4 +1,4 @@
-const {addStall,stallCheck,addWorker,ChekIdCard,addIdCard} = require('../model/stallsModel')
+const {addStall,stallCheck,addWorker,searchByNumber} = require('../model/stallsModel')
 
 const addingWorker = async (req, res) => {
   try {
@@ -20,9 +20,24 @@ const addingWorker = async (req, res) => {
   }
 }
 
+const searchingUser = async (req,res) => {
+  try{
+    const {worker_number} = req.body
+    const result = await searchByNumber(worker_number)
+    if (!result){
+      return res.status(404).json({ error: "User not found" })
+    }
+    res.status(200).json(result)
+  } catch (error) {
+    console.error(error)
+    res.status(500).json({ error: "Intenal Server error" });
+  }
+}
+
 
 module.exports = {
-  addingWorker
+  addingWorker,
+  searchingUser
 }
 
 

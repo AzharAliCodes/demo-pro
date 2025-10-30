@@ -20,11 +20,18 @@ const result = await pool.query(
 }
 
 
+const searchByNumber = async (worker_number) =>{
+const result = await pool.query("SELECT * FROM workers WHERE worker_number = $1",
+      [worker_number])
+      return result.rows[0]
+}
+
 
 module.exports = {
   addStall,
   addWorker,
-  stallCheck
+  stallCheck,
+  searchByNumber
 }
 
 
