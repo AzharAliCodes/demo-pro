@@ -1,0 +1,1 @@
+Purpose: Sleek, modern UI for long support sessions. Primary: #90CAF9 (Light Blue 300) Secondary: #B0BEC5 (Gray 400) Accent: #FFB74D (Orange 300) Background: #121212 Text: #E0E0E0
