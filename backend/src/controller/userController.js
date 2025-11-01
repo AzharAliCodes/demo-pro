@@ -67,7 +67,7 @@ const registerUser = async (req, res) => {
   const gtokenuser = {user_id: user.id, role: user.profession , email:email}
 
   const token = generateToken(gtokenuser)
-  res.status(200).json({message:"Login successfully",token})
+  res.status(200).json({message:"Login successfully",token ,user_id: user.id, role: user.profession})
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: "Internal server error" });

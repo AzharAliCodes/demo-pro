@@ -2,7 +2,7 @@
 
  const addTicket = async (req, res) => {
    try{
-    const {name, number, id} = req.body
+    const {name, number, id} = req.body.members[0]
    if (!name , !number){
     return res.status(400).json({error:"ALL Fileds are required"})
    }
