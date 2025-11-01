@@ -1,22 +1,16 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-const AdminNavigation = () => {
+const ManagerNavigation = () => {
   const navigate = useNavigate()
 
   return (
     <div className="min-h-screen bg-[#121212] flex flex-col items-center justify-center p-6">
 
       <div className="flex flex-col sm:flex-row gap-4 w-full max-w-md">
-        <button 
-        onClick={() => navigate("/admin/dashboard")}
-        className="flex-1 py-3 rounded-md bg-[#90CAF9] text-[#121212] font-medium text-lg shadow-md hover:bg-[#64B5F6] transition-all duration-300">
-          Admin
-        </button>
-
         <button
         onClick={() => navigate("/manager/dashboard")}
-        className="flex-1 py-3 rounded-md bg-[#B0BEC5] text-[#121212] font-medium text-lg shadow-md hover:bg-[#90A4AE] transition-all duration-300">
+        className="flex-1 py-3 rounded-md bg-[#90CAF9] text-[#121212] font-medium text-lg shadow-md hover:bg-[#64B5F6] transition-all duration-300">
           Manager
         </button>
 
@@ -30,4 +24,4 @@ const AdminNavigation = () => {
   );
 };
 
-export default AdminNavigation;
+export default ManagerNavigation;
