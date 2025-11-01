@@ -1,1 +1,32 @@
 Purpose: Sleek, modern UI for long support sessions. Primary: #90CAF9 (Light Blue 300) Secondary: #B0BEC5 (Gray 400) Accent: #FFB74D (Orange 300) Background: #121212 Text: #E0E0E0
+
+Add user
+update user
+view user
+delete user 
+
+Add ticket
+view Ticket
+viewl all ticket
+view 
+
+entrey Scan 
+exit Scan
+
+adding stall
+serach by number
+upadte stall user
+
+
+
+Login.jsx = for Login
+AdminNaviagtion = that show differctn naivgation that can di by Admin
+MangerNaviagtion = that show differctn naivgation that can di by Manger
+
+
+do work on 
+router.post('/tickets',authenticate,authorize(['volunteer', 'manager','admin']),addTicket)
+router.put('/tickets',authenticate,authorize(['volunteer', 'manager','admin']),updateUrl) #Dont no 
+router.get('/tickets',authenticate,authorize(['manager','admin']),viewTickets)
+router.get('/atickets',authenticate, authorize(['admin']),viewAllTickets)
+router.get('/utickets',authenticate, authorize(['manager','admin']),viewTicketsUrl)  #Dont no 

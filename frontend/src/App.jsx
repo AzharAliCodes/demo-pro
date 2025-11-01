@@ -11,9 +11,8 @@ function App() {
   <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/login" element={<LoginFrom />}/>
-        <Route path="/admin" element={<AdminNavigation />} />
-        <Route path="/manager" element={<ManagerNavigation />} />
-      {/* </Route> */}
+      <Route path="/admin" element={<AdminNavigation />} />
+      <Route path="/manager" element={<ManagerNavigation />} />
 
 
       <Route path="*" element={<h2>Page not found</h2>} />

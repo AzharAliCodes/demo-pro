@@ -12,4 +12,3 @@ router.delete('/user', authenticate,authorize(['manager','admin']), deleteUser)
 
 module.exports = router;
 
- 
