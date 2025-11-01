@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const {addTicket,updateUrl,viewTickets,viewAllTickets,viewTicketsUrl} = require('../controller/ticketController')
-const {authenticate, authorize} = require('../middlewre/auth')
+const {authenticate, authorize} = require('../middleware/auth')
 
 router.post('/tickets',authenticate,authorize(['volunteer', 'manager','admin']),addTicket)
 router.put('/tickets',authenticate,authorize(['volunteer', 'manager','admin']),updateUrl)
