@@ -4,11 +4,11 @@ const {registerUser,loginUser,updateUserById, getUser, deleteUser} = require('..
 const {authenticate, authorize} = require('../middlewre/auth')
 
 // router.post('/user',authenticate, authorize(['volunteer', 'manager','admin']), registerUser)
-router.post('/user',authenticate,registerUser)
+router.post('/user', authenticate,registerUser)
 router.post('/login',loginUser)
-router.put('/user',updateUserById)
-router.get('/user',getUser)
-router.delete('/user', deleteUser)
+router.put('/user', authenticate,updateUserById)
+router.get('/user', authenticate, getUser)
+router.delete('/user', authenticate, deleteUser)
 
 
 module.exports = router;
