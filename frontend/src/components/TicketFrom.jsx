@@ -38,7 +38,7 @@ function TicketForm() {
 
   // Add new member input
   const addMember = () => {
-    setMembers([...members, { name: '', number: '' }]);
+    setMembers([...members, { name: '', number: '', id: userIdInt }]);
   };
 
   return (

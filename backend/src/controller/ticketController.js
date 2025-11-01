@@ -2,7 +2,11 @@
 
  const addTicket = async (req, res) => {
    try{
-    const {name, number, id} = req.body.members[0]
+  req.body.members.map(member => {
+  const { name, number, id } = member;
+  
+  console.log(name, number, id);
+  
    if (!name , !number){
     return res.status(400).json({error:"ALL Fileds are required"})
    }
@@ -17,11 +21,13 @@
     message:"Ticket created successfully",
     user,
    })
+  })
   } catch (err){
     console.error(err)
     res.status(500).json({error : "Internal server error"})
   }
  }
+ 
 
  const updateUrl = async (req, res) => {
    try{
@@ -36,6 +42,7 @@
     res.status(500).json({error : "Internal server error"})
   }
  }
+ 
 
  const viewTickets = async (req, res) => {
   try{
