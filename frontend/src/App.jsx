@@ -8,6 +8,7 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
+      <Route path="/login" element={<LoginFrom />} />
 
       <Route path="*" element={<h2>page not found</h2>} />
     </Routes>
