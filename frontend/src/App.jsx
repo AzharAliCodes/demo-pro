@@ -1,17 +1,21 @@
 import { Routes, Route } from "react-router-dom"
 import LoginFrom from '../src/components/LoginForm'
 import Home from '../src/components/Home'
+import AdminNavigation from '../src/components/AdminNavigation'
 
 
 function App() {
 
   return (
-    <Routes>
+  <Routes>
       <Route path="/" element={<Home />} />
-      <Route path="/login" element={<LoginFrom />} />
+      <Route path="/login" element={<LoginFrom />}/>
+        <Route path="/admin" element={<AdminNavigation />} />
+      {/* </Route> */}
 
-      <Route path="*" element={<h2>page not found</h2>} />
-    </Routes>
+
+      <Route path="*" element={<h2>Page not found</h2>} />
+  </Routes>
   );
 };
 

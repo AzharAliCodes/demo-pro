@@ -16,9 +16,9 @@ const LoginForm = () => {
             localStorage.setItem("role", res.data.role)
             localStorage.setItem("user_id", res.data.user_id)
 
-            if (res.data.role === "admin") navigate("/")
-            else if (res.data.role === "manager") navigate("/")
-            else navigate("/")
+            if (res.data.role === "admin") navigate("/admin")
+            else if (res.data.role === "manager") navigate("/login/admin")
+            else navigate("/login/admin")
         } catch (err){
             setError(err.response?.data?.error || "Login Failed")
         }
