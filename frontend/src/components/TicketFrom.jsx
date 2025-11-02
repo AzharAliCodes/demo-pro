@@ -1,16 +1,27 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import API from '../api/api'
+import TicketPrinter from './TicketPrinter';
 
 function TicketForm() {
   const userId = localStorage.getItem('user_id') 
   const userIdInt = parseInt(userId)
-  const [members, setMembers] = useState([{ name: '', number: '' , id: userIdInt }]);
+  const [members, setMembers] = useState([{ name: '', number: '' , id: userIdInt }])
+  const [ticketCount, setTicketCount] = useState(0)
   const [message, setMessage] = useState('');
+
+  useEffect(() => {
+    console.log(ticketCount);
+  }, [ticketCount]);
+
+  useEffect(() => {
+    console.log("Tickets updated:", members);
+  }, [members]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
+     setTicketCount(ticketCount + 1)
      const res = await API.post("/tickets", { members })
      if (!res.status === 200) {       
         throw new Error('Failed to submit');
@@ -36,12 +47,13 @@ function TicketForm() {
     setMembers(updatedMembers);
   };
 
-  // Add new member input
   const addMember = () => {
+    setTicketCount(ticketCount + 1)
     setMembers([...members, { name: '', number: '', id: userIdInt }]);
   };
 
   return (
+    <>
     <div className="min-h-screen flex items-center justify-center bg-[#121212]">
       <form
         onSubmit={handleSubmit}
@@ -95,7 +107,9 @@ function TicketForm() {
         )}
       </form>
     </div>
-  );
+    {members.length === ticketCount && <TicketPrinter tickets={members} />}
+    </>
+  )
 }
 
 export default TicketForm;

@@ -10,10 +10,8 @@
   }
 
   for (const singleMember of member){
-    console.log(singleMember);
     
   const {name , number, id} = singleMember
-    console.log(name, number, id);
 
    if (!name || !number){
     return res.status(400).json({error:"ALL Fileds are required"})
