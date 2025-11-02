@@ -1,10 +1,8 @@
  const {createTicket, AddUrl,viewTicket, viewAllTicket,viewTicketUrl} = require('../model/ticketModel')
 
  const addTicket = async (req, res) => {
-   try{
-  req.body.members.map(member => {
-  const { name, number, id } = member;
-  
+  try{
+  const { name, number, id } = req.body;
   console.log(name, number, id);
   
    if (!name , !number){
@@ -21,7 +19,6 @@
     message:"Ticket created successfully",
     user,
    })
-  })
   } catch (err){
     console.error(err)
     res.status(500).json({error : "Internal server error"})

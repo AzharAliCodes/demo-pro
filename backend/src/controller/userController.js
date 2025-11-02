@@ -49,8 +49,7 @@ const registerUser = async (req, res) => {
  const loginUser = async (req, res) => {
   
   try {
-    const {email, password} = req.body;
-
+    const {email, password} = req.body
     if (!email || !password){
       return res.status(400).json({error: "Email and password is required"})
     }
@@ -58,12 +57,10 @@ const registerUser = async (req, res) => {
     if (!user){
       return res.status(400).json({error:"Invlaid email or password"})
     }
-
     const isMatch = await bcrypt.compare(password, user.password)
     if(!isMatch){
       return res.status(400).json({error:"Invlaid email or password"})
-    }
-    
+    }  
   const gtokenuser = {user_id: user.id, role: user.profession , email:email}
 
   const token = generateToken(gtokenuser)
