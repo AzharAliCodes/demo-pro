@@ -2,10 +2,20 @@
 
  const addTicket = async (req, res) => {
   try{
-  const { name, number, id } = req.body;
-  console.log(name, number, id);
-  
-   if (!name , !number){
+  const user = []
+  let member = req.body.members
+
+  if (member.length === 0){
+    return res.status(400).json({error:"No members provided"})
+  }
+
+  for (const singleMember of member){
+    console.log(singleMember);
+    
+  const {name , number, id} = singleMember
+    console.log(name, number, id);
+
+   if (!name || !number){
     return res.status(400).json({error:"ALL Fileds are required"})
    }
 
@@ -13,8 +23,12 @@
    if(!phoneRegex.test(number)){
       return res.status(400).json({error:"phone number must be  10-15 digits"})
    }
+
   
-   const user = await createTicket(name, number, id)  
+   const createUser = await createTicket(name, number, id) 
+   user.push(createUser)
+   
+  }
    res.status(200).json({
     message:"Ticket created successfully",
     user,
