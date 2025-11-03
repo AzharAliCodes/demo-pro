@@ -7,11 +7,20 @@ function TicketForm() {
   const userIdInt = parseInt(userId)
   const [members, setMembers] = useState([{ name: '', number: '' , id: userIdInt }])
   const [ticketCount, setTicketCount] = useState(0)
-  const [message, setMessage] = useState('');
+  const [message, setMessage] = useState('')
+  const [ID , setID] = useState(0)
+  const [people , setPeople] = useState(0)
 
   useEffect(() => {
-    console.log(ticketCount);
-  }, [ticketCount]);
+    console.log("ticketCount",ticketCount);
+  }, [ticketCount])
+
+
+  useEffect(() => {
+    setPeople(members.length)    
+    setTicketCount(ticketCount + 1)
+    console.log(members.length,"hello" ,ticketCount);
+  }, [ID])
 
   useEffect(() => {
     console.log("Tickets updated:", members);
@@ -21,11 +30,13 @@ function TicketForm() {
     e.preventDefault();
 
     try {
-     setTicketCount(ticketCount + 1)
      const res = await API.post("/tickets", { members })
      if (!res.status === 200) {       
         throw new Error('Failed to submit');
       }
+      console.log(res.data.user[0].id);
+      setID(res.data.user[0].id)
+      
       setMessage('Tickets submitted successfully!');
     } catch (err) {
       setMessage('Error submitting tickets.');
@@ -107,7 +118,8 @@ function TicketForm() {
         )}
       </form>
     </div>
-    {members.length === ticketCount && <TicketPrinter tickets={members} />}
+    {console.log("members.length",members.length,"ticketCount",ticketCount)}
+    {members.length+1 === ticketCount && <TicketPrinter tickets={{ID,people}} />}
     </>
   )
 }
