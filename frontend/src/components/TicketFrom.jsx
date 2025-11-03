@@ -118,7 +118,6 @@ function TicketForm() {
         )}
       </form>
     </div>
-    {console.log("members.length",members.length,"ticketCount",ticketCount)}
     {members.length+1 === ticketCount && <TicketPrinter tickets={{ID,people}} />}
     </>
   )
