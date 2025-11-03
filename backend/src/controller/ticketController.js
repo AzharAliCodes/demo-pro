@@ -41,7 +41,7 @@
 
  const viewTickets = async (req, res) => {
   try{
-   const {user_id} = req.body  
+   const {user_id} = req.user  
    const user = await viewTicket(user_id)
    const totalCost = user.length * 20
    if (!user || user.length === 0 ){
