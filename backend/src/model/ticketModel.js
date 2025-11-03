@@ -17,21 +17,13 @@ const createTicket = async (name , number,user_id) => {
 
 const viewTicket = async (user_id) => {
   try{
-   const result = await pool.query("SELECT * FROM tickets WHERE user_id = $1",[user_id])  
+   const result = await pool.query("SELECT * FROM tickets WHERE user_id = $1 ORDER BY created_at DESC",[user_id])  
    return result.rows
   }catch (err) {
     console.error(err);
   }
 }
 
-const viewTicketUrl = async (id) => {
-  try{
-   const result = await pool.query("SELECT ticket_url FROM tickets WHERE id = $1",[id])  
-   return result.rows
-  }catch (err) {
-    console.error(err);
-  }
-}
 
 const viewAllTicket = async () => {
   try{
@@ -45,6 +37,5 @@ const viewAllTicket = async () => {
 module.exports = {
   createTicket,
   viewTicket,
-  viewAllTicket,
-  viewTicketUrl
+  viewAllTicket
 }

@@ -25,5 +25,4 @@ MangerNaviagtion = that show differctn naivgation that can di by Manger
 
 
 do work on 
-router.get('/atickets',authenticate, authorize(['admin']),viewAllTickets)
 router.get('/utickets',authenticate, authorize(['manager','admin']),viewTicketsUrl)  #Dont no 
