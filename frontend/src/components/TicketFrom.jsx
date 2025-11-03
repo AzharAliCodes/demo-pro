@@ -16,14 +16,12 @@ function TicketForm() {
   }, [ticketCount])
 
 
-  useEffect(() => {
-    setPeople(members.length)    
+  useEffect(() => {   
     setTicketCount(ticketCount + 1)
-    console.log(members.length,"hello" ,ticketCount);
   }, [ID])
 
   useEffect(() => {
-    console.log("Tickets updated:", members);
+    setPeople(members.length) 
   }, [members]);
 
   const handleSubmit = async (e) => {
@@ -31,12 +29,12 @@ function TicketForm() {
 
     try {
      const res = await API.post("/tickets", { members })
-     if (!res.status === 200) {       
+     if (res.status !== 200) {       
         throw new Error('Failed to submit');
       }
       console.log(res.data.user[0].id);
       setID(res.data.user[0].id)
-      
+
       setMessage('Tickets submitted successfully!');
     } catch (err) {
       setMessage('Error submitting tickets.');
