@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import API from '../api/api';
+import TicketPrinter from './TicketPrinter'; 
 
 const Tickets = () => {
   const [tickets, setTickets] = useState([]);
   const [totalCost, setTotalCost] = useState(0);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const [selectedTicket, setSelectedTicket] = useState(null);
 
   useEffect(() => {
     fetchTickets();
@@ -15,10 +17,7 @@ const Tickets = () => {
     try {
       setLoading(true);
       setError('');
-    const userId = localStorage.getItem('user_id');
-    const response = await API.get('/tickets', {
-      params: { user_id: userId }
-    });
+      const response = await API.get('/tickets');
       setTickets(response.data.user);
       setTotalCost(response.data.totalCost);
     } catch (err) {
@@ -41,6 +40,14 @@ const Tickets = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('role');
     localStorage.removeItem('user_id');
+  };
+
+  const handleTicketClick = (ticket) => {
+    setSelectedTicket({ ID: ticket.id, people: 1 });
+  };
+
+  const handleCloseTicketPrinter = () => {
+    setSelectedTicket(null);
   };
 
   if (loading) {
@@ -80,11 +87,11 @@ const Tickets = () => {
             </div>
             <div className="text-center">
               <p className="text-[#B0BEC5] text-sm">Total Cost</p>
-              <p className="text-3xl font-bold text-[#FFB74D] mt-2">{totalCost}</p>
+              <p className="text-3xl font-bold text-[#FFB74D] mt-2">${totalCost}</p>
             </div>
             <div className="text-center">
               <p className="text-[#B0BEC5] text-sm">Cost per Ticket</p>
-              <p className="text-3xl font-bold text-[#E0E0E0] mt-2">20</p>
+              <p className="text-3xl font-bold text-[#E0E0E0] mt-2">$20</p>
             </div>
           </div>
         </div>
@@ -94,6 +101,14 @@ const Tickets = () => {
           <div className="bg-red-900 border border-red-700 text-[#E0E0E0] p-4 rounded-lg mb-6">
             {error}
           </div>
+        )}
+
+        {/* Render TicketPrinter when a ticket is selected */}
+        {selectedTicket && (
+          <TicketPrinter 
+            tickets={selectedTicket} 
+            onClose={handleCloseTicketPrinter}
+          />
         )}
 
         {/* Tickets List */}
@@ -107,7 +122,8 @@ const Tickets = () => {
             {tickets.map((ticket) => (
               <div
                 key={ticket.id}
-                className="bg-[#1E1E1E] rounded-lg p-6 border border-[#B0BEC5] hover:border-[#90CAF9] transition-colors"
+                onClick={() => handleTicketClick(ticket)}
+                className="bg-[#1E1E1E] rounded-lg p-6 border border-[#B0BEC5] hover:border-[#90CAF9] transition-colors cursor-pointer"
               >
                 <div className="flex justify-between items-start mb-4">
                   <div>
