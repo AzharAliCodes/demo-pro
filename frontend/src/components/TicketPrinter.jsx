@@ -4,6 +4,8 @@ import QRCode from "qrcode"
 const TicketPrinter = (tickets) => {
 useEffect(() => {
   if (tickets.tickets.ID === 0) return;
+  const people = tickets.tickets.people
+console.log(tickets.tickets.ID, people );
 
   const iframe = document.createElement("iframe");
   iframe.style.position = "absolute";
@@ -40,7 +42,7 @@ useEffect(() => {
         <body>
     `;
     let id = tickets.tickets.ID
-    for (let i = 0; i < tickets.tickets.people; i++) {
+    for (let i = 0; i < people; i++) {
       const qrDataUrl = await generateQR(id.toString());
       id =id+1
       content += `

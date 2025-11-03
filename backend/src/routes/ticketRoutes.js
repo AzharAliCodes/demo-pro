@@ -4,7 +4,7 @@ const {addTicket,viewTickets,viewAllTickets,viewTicketsUrl} = require('../contro
 const {authenticate, authorize} = require('../middleware/auth')
 
 router.post('/tickets',authenticate,authorize(['volunteer', 'manager','admin']),addTicket)
-router.get('/tickets',authenticate,authorize(['manager','admin']),viewTickets)
+router.get('/tickets',authenticate,authorize(['volunteer','manager','admin']),viewTickets)
 router.get('/atickets',authenticate, authorize(['admin']),viewAllTickets)
 router.get('/utickets',authenticate, authorize(['manager','admin']),viewTicketsUrl)
 
