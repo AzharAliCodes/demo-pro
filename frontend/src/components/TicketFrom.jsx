@@ -32,12 +32,12 @@ function TicketForm() {
       setID(res.data.user[0].id)
       
       setShowTicketPrinter(true)
-      
       setMessage('Tickets submitted successfully!');
-      setMembers([{ name: '', number: '', id: userIdInt }]); 
+
 
       setTimeout(() => {
-      setShowTicketPrinter(false);
+      setShowTicketPrinter(false)
+      setMembers([{ name: '', number: '', id: userIdInt }]);
     }, 3000);
     } catch (err) {
       setMessage('Error submitting tickets.');

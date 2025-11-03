@@ -5,7 +5,7 @@ const TicketPrinter = (tickets) => {
 useEffect(() => {
   if (tickets.tickets.ID === 0) return;
   const people = tickets.tickets.people
-console.log(tickets.tickets.ID, people );
+console.log("idar",tickets.tickets.ID, people );
 
   const iframe = document.createElement("iframe");
   iframe.style.position = "absolute";
