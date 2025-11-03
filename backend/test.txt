@@ -1,4 +1,5 @@
 psql -h localhost -p 5432 -U postgres -d postgres
+Bearer
 
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,
@@ -15,7 +16,6 @@ CREATE TABLE tickets (
   id SERIAL PRIMARY KEY,
   name TEXT NOT NULL,
   number VARCHAR(20) NOT NULL,
-  ticket_url TEXT,
   cash NUMERIC(10,2) DEFAULT 20.00,
   user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
   is_valid BOOLEAN DEFAULT TRUE,
@@ -47,10 +47,3 @@ CREATE TABLE workers (
         REFERENCES stalls(stall_no)
         ON DELETE CASCADE
 );
-
-Bearer
-
-
-
-
-

@@ -25,7 +25,6 @@ MangerNaviagtion = that show differctn naivgation that can di by Manger
 
 
 do work on 
-router.post('/tickets',authenticate,authorize(['volunteer', 'manager','admin']),addTicket)
 router.put('/tickets',authenticate,authorize(['volunteer', 'manager','admin']),updateUrl) #Dont no 
 router.get('/tickets',authenticate,authorize(['manager','admin']),viewTickets)
 router.get('/atickets',authenticate, authorize(['admin']),viewAllTickets)
