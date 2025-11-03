@@ -23,6 +23,8 @@ Login.jsx = for Login
 AdminNaviagtion = that show differctn naivgation that can di by Admin
 MangerNaviagtion = that show differctn naivgation that can di by Manger
 
-
-do work on 
-router.get('/utickets',authenticate, authorize(['manager','admin']),viewTicketsUrl)  #Dont no 
+new task
+router.post('/user',authenticate, authorize(['volunteer', 'manager','admin']), registerUser)
+router.put('/user', authenticate,authorize(['manager','admin']),updateUserById)
+router.get('/user', authenticate,authorize(['manager','admin']), getUser)
+router.delete('/user', authenticate,authorize(['manager','admin']), deleteUser)
