@@ -14,17 +14,6 @@ const createTicket = async (name , number,user_id) => {
   }
 }
 
-const AddUrl = async (ticket_url, id) => {
-  try{
-    const result = await pool.query("UPDATE tickets SET ticket_url = $1 WHERE id = $2 RETURNING *", [
-      ticket_url,
-      id,
-    ])
-    return result.rows[0]
-  }catch (err) {
-    console.error(err);
-  }
-}
 
 const viewTicket = async (user_id) => {
   try{
@@ -55,7 +44,6 @@ const viewAllTicket = async () => {
 
 module.exports = {
   createTicket,
-  AddUrl,
   viewTicket,
   viewAllTicket,
   viewTicketUrl
