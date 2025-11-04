@@ -1,4 +1,4 @@
-const { createUser, getUserByEmail, deleteUserByEmail,updateUser, resultSearch } = require("../model/userModel")
+const { createUser, deleteUserByEmail,updateUser, resultSearch } = require("../model/userModel")
 const generateToken = require('../utils/generateToken')
 const bcrypt = require('bcrypt')
 
@@ -53,7 +53,7 @@ const registerUser = async (req, res) => {
     if (!email || !password){
       return res.status(400).json({error: "Email and password is required"})
     }
-    const user = await getUserByEmail(email);
+    const user = await resultSearch(email);
     if (!user){
       return res.status(400).json({error:"Invlaid email or password"})
     }
@@ -71,24 +71,6 @@ const registerUser = async (req, res) => {
   }
  }
 
-const getUser = async (req, res) => {
-  try {
-    const {email} = req.body;
-
-    if (!email){
-      return res.status(400).json({error: "Email is required"})
-    }    
-    const user = await getUserByEmail(email);
-    if (!user){
-      return res.status(400).json({error:"Invlaid email"})
-    } else {
-      return res.status(200).json(user)
-    }
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: "Internal server error" });
-  }
-}
 
 const updateUserById = async (req, res) =>{
   try{ 
@@ -128,7 +110,7 @@ const deleteUser = async (req, res) => {
     if (!email){
       return res.status(400).json({error: "Email is required"})
     }    
-    const user = await getUserByEmail(email);
+    const user = await resultSearch(email);
     if (!user){
       return res.status(400).json({error:"Invlaid email"})
     } 
@@ -145,7 +127,7 @@ const deleteUser = async (req, res) => {
     
     const { query } = req.query
     if (!query) {
-      return res.status(400).json({ error: "Search query is required" });
+      return res.status(400).json({ error: "Email is required" });
     }
 
     const result = await resultSearch(query) 
@@ -166,7 +148,6 @@ module.exports = {
   registerUser,
   loginUser,
   updateUserById,
-  getUser,
   deleteUser,
   searchUser
 }

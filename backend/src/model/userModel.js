@@ -11,21 +11,6 @@ const createUser = async({name, password, phone_number, email, profession})=>{
     return result.rows[0]
 }
 
-const getUserByEmail = async (email) =>{
-  try{
-    const query = `SELECT * FROM users WHERE email = $1`
-    const values = [email]
-    
-    const result = await pool.query(query, values)
-    if (result.rows.length === 0){
-      return null;
-    }
-    return result.rows[0]
-  } catch (err){
-    console.error("Error fetching user by email:",err)
-    throw err
-  }
-}
 
 const updateUser = async ({ id, name, phone_number, email, profession }) => {
   const result = await pool.query(
@@ -68,7 +53,6 @@ const deleteUserByEmail = async (email) => {
 
 module.exports = {
   createUser,
-  getUserByEmail,
   updateUser,
   deleteUserByEmail,
   resultSearch

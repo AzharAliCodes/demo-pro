@@ -24,8 +24,6 @@ AdminNaviagtion = that show differctn naivgation that can di by Admin
 MangerNaviagtion = that show differctn naivgation that can di by Manger
 
 new task
-router.put('/user', authenticate,authorize(['manager','admin']),updateUserById)
-router.get('/user', authenticate,authorize(['manager','admin']), getUser)
 router.delete('/user', authenticate,authorize(['manager','admin']), deleteUser)
 
 
