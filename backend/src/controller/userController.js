@@ -149,14 +149,12 @@ const deleteUser = async (req, res) => {
     }
 
     const result = await resultSearch(query) 
-
-   console.log("yaha");
    
     if (!result) {
       return res.status(404).json({ error: "User not found" });
     }
 
-    res.json(result.rows);
+    res.status(200).json(result)
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Internal server error" });

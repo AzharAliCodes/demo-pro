@@ -35,14 +35,17 @@ const UserUpdate = () => {
     try {
       // This endpoint would need to be implemented in your backend
       const response = await API.get(`/users/search?query=${encodeURIComponent(searchQuery)}`);
-      const user = response.data;
+      const user = response.data
+
+      console.log(user[0].id);
+      
       
       setFormData({
-        id: user.id,
-        name: user.name || '',
-        phone_number: user.phone_number || '',
-        email: user.email || '',
-        profession: user.profession || ''
+        id: user[0].id,
+        name: user[0].name || '',
+        phone_number: user[0].phone_number || '',
+        email: user[0].email || '',
+        profession: user[0].profession || ''
       });
       setUserFound(true);
       setSuccess('User found! You can now update their information.');

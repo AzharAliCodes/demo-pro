@@ -50,7 +50,7 @@ const resultSearch = async (query) => {
        FROM users 
        WHERE email = $1`,
       [query]
-    );  
+    )  
   return result.rows
 }
 
