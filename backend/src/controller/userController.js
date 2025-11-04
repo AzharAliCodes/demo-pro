@@ -1,4 +1,4 @@
-const { createUser, getUserByEmail, deleteUserByEmail,updateUser } = require("../model/userModel")
+const { createUser, getUserByEmail, deleteUserByEmail,updateUser, resultSearch } = require("../model/userModel")
 const generateToken = require('../utils/generateToken')
 const bcrypt = require('bcrypt')
 
@@ -139,10 +139,36 @@ const deleteUser = async (req, res) => {
     res.status(500).json({ error: "Internal server error" });
   }
 }
+
+  const searchUser =  async (req, res) => {
+  try {  
+    
+    const { query } = req.query
+    if (!query) {
+      return res.status(400).json({ error: "Search query is required" });
+    }
+
+    const result = await resultSearch(query) 
+
+   console.log("yaha");
+   
+    if (!result) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    res.json(result.rows);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+}
+
+
 module.exports = {
   registerUser,
   loginUser,
   updateUserById,
   getUser,
-  deleteUser
+  deleteUser,
+  searchUser
 }

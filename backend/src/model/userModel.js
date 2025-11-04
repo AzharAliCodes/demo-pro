@@ -43,6 +43,17 @@ const updateUser = async ({ id, name, phone_number, email, profession }) => {
   return result.rows[0];
 };
 
+const resultSearch = async (query) => {
+
+  const result =await pool.query(
+      `SELECT id, name, phone_number, email, profession 
+       FROM users 
+       WHERE email = $1`,
+      [query]
+    );  
+  return result.rows
+}
+
 const deleteUserByEmail = async (email) => {
   const result = await pool.query(
     `DELETE FROM users
@@ -60,4 +71,5 @@ module.exports = {
   getUserByEmail,
   updateUser,
   deleteUserByEmail,
+  resultSearch
 }
