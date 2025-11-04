@@ -342,32 +342,30 @@ const UserUpdate = () => {
                 </div>
 
                 {/* Profession Field */}
-                <div>
-                  <label htmlFor="profession" className="block text-sm font-medium text-[#E0E0E0] mb-2">
-                    Profession *
-                  </label>
-                  <select
-                    id="profession"
-                    name="profession"
-                    value={formData.profession}
-                    onChange={handleChange}
-                    className={`w-full px-4 py-3 bg-gray-700 border rounded-lg focus:outline-none focus:ring-2 transition-colors text-[#E0E0E0] ${
-                      errors.profession 
-                        ? 'border-red-500 focus:ring-red-500' 
-                        : 'border-gray-600 focus:ring-[#90CAF9] focus:border-[#90CAF9]'
-                    }`}
-                  >
-                    <option value="">Select a profession</option>
-                    {professions.map(prof => (
-                      <option key={prof} value={prof} className="bg-gray-700">
-                        {prof}
-                      </option>
-                    ))}
-                  </select>
-                  {errors.profession && (
-                    <p className="mt-1 text-sm text-red-400">{errors.profession}</p>
-                  )}
-                </div>
+            <div>
+              <label htmlFor="profession" className="block text-sm font-medium text-gray-200 mb-2">
+                 Profession *
+            </label>
+            <select
+                id="profession"
+                name="profession"
+                value={formData.profession}
+                onChange={handleChange}
+                className={`w-full px-4 py-3 bg-gray-800 border rounded-lg focus:outline-none focus:ring-2 transition-colors text-gray-100
+                  ${errors.profession 
+                    ? 'border-red-500 focus:ring-red-500' 
+                    : 'border-gray-600 focus:ring-blue-400 focus:border-blue-400'
+                  }`}
+              >
+                <option value="" disabled hidden>Select a profession</option>
+                {professions.map(prof => (
+                  <option key={prof} value={prof}>{prof}</option>
+                ))}
+              </select>
+              {errors.profession && (
+                <p className="mt-1 text-sm text-red-400">{errors.profession}</p>
+              )}
+            </div>
 
                 {/* Submit Button */}
                 <button
