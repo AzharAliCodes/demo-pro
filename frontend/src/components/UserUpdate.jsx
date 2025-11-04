@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, } from 'react';
 import API from '../api/api';
 
 const UserUpdate = () => {
@@ -121,7 +121,7 @@ const UserUpdate = () => {
 
     setLoading(true);
     try {
-      const response = await API.put('/user', formData);
+      await API.put('/user', formData);
       setSuccess('User updated successfully!');
       // Reset form after successful update
       setTimeout(() => {
